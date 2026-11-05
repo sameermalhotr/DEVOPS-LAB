@@ -1,0 +1,127 @@
+LAB 2 - CONTAINERIZATION AND KUBERNETES ORCHESTRATION
+
+ENVIRONMENT
+lsb_release -a
+docker --version
+docker compose version
+docker run hello-world
+docker ps -a
+
+PROJECT / IMAGE BUILD
+docker build -t devops-lab2:v1 .
+docker history devops-lab2:v1
+docker run -d --name lab2-app -p 5000:5000 devops-lab2:v1
+docker ps
+curl http://localhost:5000
+curl http://localhost:5000/health
+
+CONTAINER / IMAGE MANAGEMENT
+docker stop lab2-app
+docker start lab2-app
+docker ps --filter name=lab2-app
+docker tag devops-lab2:v1 devops-lab2:latest
+docker images devops-lab2
+docker run -d --name lab2-temp devops-lab2:v1
+docker stop lab2-temp
+docker rm lab2-temp
+
+DOCKER COMPOSE
+docker compose up -d
+docker compose ps
+curl http://localhost:5001
+docker compose down
+
+DOCKER HUB
+docker login
+docker tag devops-lab2:v1 axdy02/devops-lab2:v1
+docker push axdy02/devops-lab2:v1
+
+STORAGE - DATA LOSS
+docker run -it --name storage-test ubuntu bash
+echo "Temporary Lab 2 Data" > /tmp/data.txt
+cat /tmp/data.txt
+exit
+docker rm storage-test
+docker run --rm ubuntu cat /tmp/data.txt
+
+STORAGE - NAMED VOLUME
+docker volume create lab2-data
+docker run --name volume-test -v lab2-data:/data ubuntu sh -c 'echo "Persistent Lab 2 Data" > /data/data.txt'
+docker rm volume-test
+docker run --rm -v lab2-data:/data ubuntu cat /data/data.txt
+docker volume ls
+
+STORAGE - BIND MOUNT
+mkdir -p ~/devops-lab2/bind-data
+echo "Created from Ubuntu host" > ~/devops-lab2/bind-data/host.txt
+docker run --rm -v ~/devops-lab2/bind-data:/data ubuntu cat /data/host.txt
+docker run --rm -v ~/devops-lab2/bind-data:/data ubuntu sh -c 'echo "Created from Docker container" > /data/container.txt'
+cat ~/devops-lab2/bind-data/container.txt
+
+DOCKER NETWORK
+docker network create lab2-network
+docker run -d --name network-a --network lab2-network alpine sleep 3600
+docker run -d --name network-b --network lab2-network alpine sleep 3600
+docker ps --filter network=lab2-network
+docker exec network-a ping -c 4 network-b
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' network-b
+docker exec network-a ping -c 4 172.19.0.3
+docker network inspect lab2-network
+docker rm -f network-a network-b
+docker network rm lab2-network
+
+KUBERNETES / MINIKUBE
+kubectl version --client
+minikube version
+minikube start --driver=docker
+kubectl get nodes
+minikube status
+
+KUBERNETES DEPLOYMENT
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+kubectl rollout status deployment/devops-lab2
+kubectl get deployments
+kubectl get pods
+kubectl get services
+kubectl port-forward service/devops-lab2-service 8081:5000
+
+SCALING
+kubectl scale deployment devops-lab2 --replicas=4
+kubectl rollout status deployment/devops-lab2
+kubectl get deployment devops-lab2
+kubectl get pods
+
+VERSION 2 / DOCKER HUB
+docker build -t axdy02/devops-lab2:v2 .
+docker push axdy02/devops-lab2:v2
+
+ROLLING UPDATE
+kubectl set image deployment/devops-lab2 devops-lab2=axdy02/devops-lab2:v2
+kubectl rollout status deployment/devops-lab2
+kubectl get pods
+kubectl get deployment devops-lab2 -o jsonpath='{.spec.template.spec.containers[0].image}'; echo
+
+ROLLBACK
+kubectl rollout history deployment/devops-lab2
+kubectl rollout undo deployment/devops-lab2
+kubectl rollout status deployment/devops-lab2
+kubectl get deployment devops-lab2 -o jsonpath='{.spec.template.spec.containers[0].image}'; echo
+
+JENKINS ACCESS TO KUBECTL
+echo 'jenkins ALL=(user) NOPASSWD: /usr/local/bin/kubectl' | sudo tee /etc/sudoers.d/jenkins-kubectl
+sudo chmod 440 /etc/sudoers.d/jenkins-kubectl
+sudo -H -u user kubectl get nodes
+
+GIT / GITHUB
+git init
+git branch -M main
+git add .
+git commit -m "Complete Docker and Kubernetes Lab 2"
+git remote add origin https://github.com/axdy02/devops-lab2.git
+git push -u origin main
+
+FINAL VERIFICATION
+kubectl get deployment devops-lab2
+kubectl get pods
+kubectl get deployment devops-lab2 -o jsonpath='{.spec.template.spec.containers[0].image}'; echo

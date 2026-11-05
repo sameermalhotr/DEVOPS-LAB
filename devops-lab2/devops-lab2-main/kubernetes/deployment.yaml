@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-lab2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devops-lab2
+  template:
+    metadata:
+      labels:
+        app: devops-lab2
+    spec:
+      containers:
+        - name: devops-lab2
+          image: axdy02/devops-lab2:v2
+          ports:
+            - containerPort: 5000
+

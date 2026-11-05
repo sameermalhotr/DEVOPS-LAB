@@ -1,0 +1,10 @@
+services:
+  web:
+    image: devops-lab2:v1
+    ports:
+      - "5001:5000"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
