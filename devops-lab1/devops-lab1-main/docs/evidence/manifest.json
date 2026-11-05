@@ -1,0 +1,492 @@
+[
+  {
+    "id": "SS01",
+    "file": "screenshots/ss01-ubuntu-version.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 1,
+    "source_part": "word/media/image1.png",
+    "title": "Ubuntu environment",
+    "caption": "Ubuntu 26.04.1 LTS (resolute) is shown by lsb_release -a.",
+    "requirements": "Q1",
+    "sha256": "f7a4fe71c90d00542f3700ca5484d7f2dd69e86090735e317b59359357770070",
+    "pixel_size": [
+      333,
+      117
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS02",
+    "file": "screenshots/ss02-git-version.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 1,
+    "source_part": "word/media/image2.png",
+    "title": "Git installation",
+    "caption": "git --version reports Git 2.53.0.",
+    "requirements": "Q1",
+    "sha256": "809151f57397c9d0cfc6cc0385f9cea805e980470bb24743a4c63ce5ac9fd62f",
+    "pixel_size": [
+      253,
+      39
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS03",
+    "file": "screenshots/ss03-java-version.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 1,
+    "source_part": "word/media/image3.png",
+    "title": "Java installation",
+    "caption": "java -version reports OpenJDK 21.0.12.1.",
+    "requirements": "Q1",
+    "sha256": "8aaced9d57d090bfdd72303685bc540f5566c9f802fdfff81396a6455fbd9b64",
+    "pixel_size": [
+      746,
+      79
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS04",
+    "file": "screenshots/ss04-systemd-running.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 1,
+    "source_part": "word/media/image4.png",
+    "title": "systemd health",
+    "caption": "systemctl is-system-running reports running.",
+    "requirements": "Q1",
+    "sha256": "3e4ebf7b9e640726ae5441a179e449903acf440d2c50d10f036a204b21b495ea",
+    "pixel_size": [
+      379,
+      44
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS05",
+    "file": "screenshots/ss05-jenkins-version.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 1,
+    "source_part": "word/media/image5.png",
+    "title": "Jenkins installation",
+    "caption": "jenkins --version reports 2.580.1.",
+    "requirements": "Q1",
+    "sha256": "e21779279862686dada828a0f068806d2d1588d6c7e01e627b1a5586c0524fcb",
+    "pixel_size": [
+      302,
+      45
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS06",
+    "file": "screenshots/ss06-jenkins-service.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 1,
+    "source_part": "word/media/image6.png",
+    "title": "Jenkins service",
+    "caption": "The service is enabled and active (running).",
+    "requirements": "Q1",
+    "sha256": "903166c23b5b1f57087230af2e6689944a81ee9d014fc350ec9acf36ca4b1278",
+    "pixel_size": [
+      801,
+      77
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS07",
+    "file": "screenshots/ss07-jenkins-unlock.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 1,
+    "source_part": "word/media/image7.png",
+    "title": "Jenkins initial setup",
+    "caption": "The Unlock Jenkins page is visible. The password field is empty.",
+    "requirements": "Q1",
+    "sha256": "e6a5da23e2c63c56f2239f31e7fdb3bb69fa79f4d1165a90732cd4a80ad9efb3",
+    "pixel_size": [
+      2559,
+      1386
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS08",
+    "file": "screenshots/ss08-jenkins-dashboard.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 2,
+    "source_part": "word/media/image8.png",
+    "title": "Jenkins dashboard",
+    "caption": "The configured Jenkins dashboard is accessible in the browser.",
+    "requirements": "Q1",
+    "sha256": "d037f39787f67b107d2b9a73a55bdb5d3fbece19b7a6444294631395e3271b36",
+    "pixel_size": [
+      2559,
+      1391
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS09",
+    "file": "screenshots/ss09-git-global-config.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 2,
+    "source_part": "word/media/image9.png",
+    "title": "Git global configuration",
+    "caption": "The screenshot shows user.name=axdy02 and a configured user.email. The original email remains visible.",
+    "requirements": "Q1",
+    "sha256": "86e2c059daf0ca8841322b6183f7cddd4c31a4843c54b0c1f24eb67f6a3752bd",
+    "pixel_size": [
+      382,
+      60
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS10",
+    "file": "screenshots/ss10-git-initialized.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 2,
+    "source_part": "word/media/image10.png",
+    "title": "Repository initialization",
+    "caption": "git status shows main and No commits yet.",
+    "requirements": "Q2",
+    "sha256": "be5c1fb76cde53ccd0eb6770e5c6a3a7f1ba0c604739f7d57e79a53d3339c2d5",
+    "pixel_size": [
+      342,
+      77
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS11",
+    "file": "screenshots/ss11-first-commit.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 2,
+    "source_part": "word/media/image11.png",
+    "title": "First commit",
+    "caption": "The initial Python application and README commit is shown, followed by git log.",
+    "requirements": "Q2",
+    "sha256": "1a76ada705e2e44a6245338e673fe1c282cd90e4723a95b94c6bb3da8966925a",
+    "pixel_size": [
+      683,
+      136
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS12",
+    "file": "screenshots/ss12-feature-branch.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 2,
+    "source_part": "word/media/image12.png",
+    "title": "Feature branch",
+    "caption": "git switch -c feature-tests creates the branch and git branch lists it.",
+    "requirements": "Q2",
+    "sha256": "86b7ccd5e5ba1220510067951528dd56dfe3b70b7c4d5be41552f9fbdfaa1baf",
+    "pixel_size": [
+      495,
+      92
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS13",
+    "file": "screenshots/ss13-local-tests.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 2,
+    "source_part": "word/media/image13.png",
+    "title": "Local unit tests",
+    "caption": "Both test_add and test_add_negative_numbers pass locally. This is not a Jenkins run.",
+    "requirements": "Q2, Q4",
+    "sha256": "17d188829321b26b2a4671bf8b90d89777129d9497934209a7b46275c01de386",
+    "pixel_size": [
+      1074,
+      271
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS14",
+    "file": "screenshots/ss14-feature-commit.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 3,
+    "source_part": "word/media/image14.png",
+    "title": "Feature commit history",
+    "caption": "The feature-tests branch contains the unit-test commit ahead of main.",
+    "requirements": "Q2",
+    "sha256": "37870433e3a9215406b9e263c8d022789e9ba588a5a246022dc6080baafb0ead",
+    "pixel_size": [
+      533,
+      64
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS15",
+    "file": "screenshots/ss15-feature-merge.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 3,
+    "source_part": "word/media/image15.png",
+    "title": "Feature merge",
+    "caption": "git merge feature-tests completes as a fast-forward; the history includes both commits.",
+    "requirements": "Q2",
+    "sha256": "cc80d9fc4eea3aa1a5ddae05364df691630c84e7fa4828dd665724c27c2752ad",
+    "pixel_size": [
+      603,
+      249
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS16",
+    "file": "screenshots/ss16-local-history.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 3,
+    "source_part": "word/media/image16.png",
+    "title": "Local branch history",
+    "caption": "main, docs-update and feature-tests references appear in the local decorated history.",
+    "requirements": "Q2, Q6",
+    "sha256": "dad4fb2503adf5af4ed7836d370b9180826a8eebfc9e90a9989ecd75fffb647b",
+    "pixel_size": [
+      688,
+      79
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS17",
+    "file": "screenshots/ss17-empty-github-repo.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 3,
+    "source_part": "word/media/image17.png",
+    "title": "GitHub repository created",
+    "caption": "The empty GitHub repository setup page is shown.",
+    "requirements": "Q2",
+    "sha256": "1d4f439a9f529b084c06015b4a5de36fd3de19e87fb592c8b85f61c82036e02f",
+    "pixel_size": [
+      2519,
+      1324
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS18",
+    "file": "screenshots/ss18-github-auth.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 3,
+    "source_part": "word/media/image18.png",
+    "title": "GitHub authentication",
+    "caption": "gh auth status reports the axdy02 account. The token is masked in the source screenshot.",
+    "requirements": "Q2",
+    "sha256": "af69d0ae57a7a7c98cf68699ac5c31785824bbfe42e798cd831d8c731dff7e7f",
+    "pixel_size": [
+      706,
+      161
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS19",
+    "file": "screenshots/ss19-github-push.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 4,
+    "source_part": "word/media/image19.png",
+    "title": "Successful GitHub push",
+    "caption": "git push -u origin main succeeds and configures upstream tracking.",
+    "requirements": "Q2",
+    "sha256": "09c49046d5b11ed97176b8e2b5ed09e63deeb80c9b1b051e0f24354390ab03e2",
+    "pixel_size": [
+      580,
+      213
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS20",
+    "file": "screenshots/ss20-github-source.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 4,
+    "source_part": "word/media/image20.png",
+    "title": "Source files on GitHub",
+    "caption": "The initial source, tests, requirements and README appear on GitHub with three commits.",
+    "requirements": "Q2",
+    "sha256": "69c4014de83fb5d4c8babb6348a45bfbe45566df9a79c2bf660fbe9d55c04324",
+    "pixel_size": [
+      957,
+      1010
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS21",
+    "file": "screenshots/ss21-github-jenkinsfile.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 5,
+    "source_part": "word/media/image21.png",
+    "title": "Pipeline file on GitHub",
+    "caption": "Jenkinsfile is present in the repository after the pipeline commit.",
+    "requirements": "Q3, Q4",
+    "sha256": "54236a33cbd2fcbe9180c76d9de406b111d6d71cc1498f86ed651fbab72c175e",
+    "pixel_size": [
+      941,
+      1049
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS22",
+    "file": "screenshots/ss22-jenkins-console.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 6,
+    "source_part": "word/media/image22.png",
+    "title": "Jenkins build 1 console",
+    "caption": "Build #1 shows two passing tests, the Deploy commands and application output, the success post action, and Finished: SUCCESS. The top of the checkout log is outside this screenshot.",
+    "requirements": "Q3, Q4, Q5",
+    "sha256": "a93e889c10b6bd80494daab69dd6fd0bae5729e3e5fe6c2e32993c1b0ccab00d",
+    "pixel_size": [
+      2559,
+      1390
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS23",
+    "file": "screenshots/ss23-manual-deploy-check.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 6,
+    "source_part": "word/media/image23.png",
+    "title": "Manual deployment check",
+    "caption": "The developer terminal copies and executes deploy/app.py. This is a manual check; Jenkins-run deployment is separately evidenced by SS22.",
+    "requirements": "Q5",
+    "sha256": "22a84139f490a24583caf986fdc187b843f5c50d480086d6c6c34e657cfb0839",
+    "pixel_size": [
+      520,
+      97
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS24",
+    "file": "screenshots/ss24-build-2-running.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 6,
+    "source_part": "word/media/image24.png",
+    "title": "Second build appearing",
+    "caption": "The Build Time Trend view includes a second build. This view alone does not identify its trigger cause.",
+    "requirements": "Q3, Q5",
+    "sha256": "e565e7488d0fe807a0d9a18b39e38f5d3bf2e3ca03affa353e420d29859e3369",
+    "pixel_size": [
+      2559,
+      1391
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS25",
+    "file": "screenshots/ss25-builds-successful.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 7,
+    "source_part": "word/media/image25.png",
+    "title": "Two successful builds",
+    "caption": "The Build Time Trend view shows builds #1 and #2 successful, with durations of 11 seconds and 5.4 seconds respectively. It does not show the trigger cause.",
+    "requirements": "Q3, Q5",
+    "sha256": "51be0e9725394ac5e1391b8e8b879f4912c62b0bf6acbaebd2094ff8eaa267a1",
+    "pixel_size": [
+      2559,
+      1391
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS26",
+    "file": "screenshots/ss26-commands-commit.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 7,
+    "source_part": "word/media/image26.png",
+    "title": "Command documentation commit",
+    "caption": "commands.txt is committed and pushed successfully.",
+    "requirements": "Q6",
+    "sha256": "f0fa6fa708f1e6496f090cb43b58ee77da76f89e9b3201f509b77cfdcf5faef9",
+    "pixel_size": [
+      727,
+      306
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS27",
+    "file": "screenshots/ss27-commands-on-github.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 8,
+    "source_part": "word/media/image27.png",
+    "title": "Command documentation on GitHub",
+    "caption": "commands.txt is visible on GitHub; the README also contains the trigger-verification statement. That statement is not independent trigger evidence.",
+    "requirements": "Q6",
+    "sha256": "2e3f79d690331880da8ef6044268bbcfc16dd4b498ba8098197b01d6ef204b6a",
+    "pixel_size": [
+      948,
+      1122
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS28",
+    "file": "screenshots/ss28-report-commit.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 9,
+    "source_part": "word/media/image28.png",
+    "title": "Report commit",
+    "caption": "REPORT.md is committed and pushed successfully.",
+    "requirements": "Q7",
+    "sha256": "e085475a01010b70719bf3c5c07864c88c71cdef2321d5392935f734a59a7904",
+    "pixel_size": [
+      741,
+      309
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS29",
+    "file": "screenshots/ss29-report-on-github.png",
+    "source_document": "Devops lab 1 evidence.docx",
+    "source_page": 10,
+    "source_part": "word/media/image29.png",
+    "title": "Report on GitHub",
+    "caption": "The repository contains REPORT.md, commands.txt, Jenkinsfile and the application files.",
+    "requirements": "Q6, Q7",
+    "sha256": "91db44e8e7c9ef439df1abc8d1225ea5b4979f466d124b5cd3849beceed43b16",
+    "pixel_size": [
+      948,
+      1173
+    ],
+    "transformation": "none; original embedded image bytes"
+  },
+  {
+    "id": "SS22A",
+    "file": "screenshots/ss22a-console-detail.png",
+    "source_image": "SS22",
+    "transformation": "rectangular detail crop only; no altered or synthesized text",
+    "crop_box": [
+      365,
+      452,
+      1520,
+      1280
+    ],
+    "sha256": "218d84d42b4830ff6ba7310f27ae0274a998cd2555bcf7486feaaaba2c07bac0"
+  },
+  {
+    "id": "SS25A",
+    "file": "screenshots/ss25a-build-results-detail.png",
+    "source_image": "SS25",
+    "transformation": "rectangular detail crop only; no altered or synthesized text",
+    "crop_box": [
+      345,
+      140,
+      1380,
+      430
+    ],
+    "sha256": "2601892acc415f818b633cd9c5692bd7be0bf3b2d856d8040165ca7f5556cf4b"
+  }
+]

@@ -1,0 +1,25 @@
+JENKINS BUILD #1 - SELECTED SCREENSHOT TRANSCRIPTION
+
+Source: ../screenshots/ss22-jenkins-console.png
+This is an excerpt transcribed from visible lines, not a full raw console export.
+Omitted lines are not reconstructed. The checkout and trigger-cause lines are
+outside the visible source screenshot.
+
+Visible environment:
+Python 3.14.4, pytest-9.1.1
+rootdir: /var/lib/jenkins/workspace/devops-lab1
+
+Selected result lines (omissions between sections):
+test_app.py::test_add PASSED
+test_app.py::test_add_negative_numbers PASSED
+2 passed in 0.00s
+
+[Pipeline] { (Deploy)
++ mkdir -p deploy
++ cp app.py deploy/app.py
++ python3 deploy/app.py
+DevOps Lab 1 Application
+2 + 3 = 5
+
+CI/CD Pipeline completed successfully!
+Finished: SUCCESS

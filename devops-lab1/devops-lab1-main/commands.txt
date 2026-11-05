@@ -1,0 +1,149 @@
+LAB 1 - RECONSTRUCTED COMMAND REFERENCE
+
+This file reconstructs the practical workflow from the instructions, screenshots
+and repository. It is not a verbatim shell-history export or a fabricated log.
+Do not run the whole file as a script over the existing repository.
+Angle-bracket values are placeholders and must be replaced when used.
+The screenshot records user.name=axdy02; this reference uses that actual value.
+
+1. WINDOWS POWERSHELL - OPEN THE EXISTING UBUNTU DISTRIBUTION
+wsl -l -v
+wsl -d Ubuntu
+
+2. UBUNTU - ENVIRONMENT VERIFICATION
+cd ~
+lsb_release -a
+ps -p 1 -o comm=
+systemctl is-system-running
+
+3. SYSTEM PACKAGES - HISTORICAL SETUP / FRESH ENVIRONMENT REFERENCE
+sudo apt update
+sudo apt upgrade -y
+sudo apt install git -y
+sudo apt install openjdk-21-jre-headless -y
+sudo apt install python3-venv -y
+git --version
+java -version
+
+4. JENKINS INSTALLATION REFERENCE (2026 LTS REPOSITORY KEY)
+See docs/SETUP.md and the official Jenkins Linux guide before a future install.
+sudo mkdir -p /etc/apt/keyrings
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins -y
+sudo systemctl enable --now jenkins
+jenkins --version
+systemctl status jenkins --no-pager
+
+Browser setup: http://localhost:8080
+The initial administrator password is read locally during setup; its value and
+credential-file contents must never be added to evidence or version control.
+
+5. GLOBAL GIT IDENTITY
+git config --global user.name "axdy02"
+git config --global user.email "<YOUR_GIT_EMAIL>"
+git config --global --get user.name
+git config --global --get user.email
+
+6. INITIAL REPOSITORY AND FIRST COMMIT
+cd ~
+mkdir devops-lab1
+cd devops-lab1
+git init
+git branch -M main
+git status
+nano app.py
+python3 app.py
+nano README.md
+git add app.py README.md
+git status
+git commit -m "Initial Python application setup"
+git log --oneline
+
+7. FEATURE BRANCH AND TESTING
+git switch -c feature-tests
+git branch
+nano test_app.py
+nano requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pytest -v
+nano .gitignore
+git status
+git add .gitignore requirements.txt test_app.py
+git commit -m "Add unit tests with pytest"
+git log --oneline
+git switch main
+git merge feature-tests
+git log --oneline --graph --all
+
+8. DOCUMENTATION BRANCH
+git switch -c docs-update
+nano README.md
+git add README.md
+git commit -m "Document CI/CD pipeline stages"
+git switch main
+git merge docs-update
+git log --oneline --graph --decorate --all
+
+9. GITHUB AUTHENTICATION AND PUSH
+git remote add origin https://github.com/axdy02/devops-lab1.git
+git remote -v
+sudo apt install gh -y
+gh auth login
+gh auth status
+git push -u origin main
+Browser login is interactive. No account password or access token belongs here.
+
+10. PIPELINE COMMIT
+nano Jenkinsfile
+git add Jenkinsfile
+git commit -m "Add Jenkins CI/CD pipeline"
+git push
+Job setup is documented in docs/JENKINS.md.
+
+11. COMMANDS EXECUTED BY THE JENKINSFILE
+Build:
+python3 -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+python3 -m compileall app.py
+
+Test:
+. venv/bin/activate
+pytest -v
+
+Deploy (local workspace staging and smoke test):
+mkdir -p deploy
+cp app.py deploy/app.py
+python3 deploy/app.py
+
+12. HISTORICAL TRIGGER TEST CHANGE
+cd ~/devops-lab1
+# README.md was changed for the trigger demonstration.
+git add README.md
+git commit -m "Test automated Jenkins trigger"
+git push
+Jenkinsfile configures pollSCM('H/2 * * * *').
+Do not click Build Now while collecting evidence of an automatic trigger.
+Verify the actual build cause rather than inferring it from a green status.
+
+13. ORIGINAL DOCUMENTATION COMMITS
+nano commands.txt
+git add commands.txt
+git commit -m "Add Lab 1 command documentation"
+git push
+nano REPORT.md
+git add REPORT.md
+git commit -m "Add Lab 1 CI/CD workflow report"
+git push
+
+14. NEW EVIDENCE CAPTURE - TO RUN AFTER ADDING THE DOCUMENTATION PACK
+bash scripts/capture-evidence.sh
+Export the full console logs through the authenticated Jenkins browser.
+See docs/evidence/logs/README.md.
+Stage only the intended documentation/evidence files, review, commit and push.
+
+Repository: https://github.com/axdy02/devops-lab1
