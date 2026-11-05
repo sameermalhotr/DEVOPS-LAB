@@ -1,0 +1,79 @@
+{
+  "provenance": "Transcribed from supplied screenshots; not newly executed results",
+  "ansible": {
+    "first": {
+      "ok": 4,
+      "changed": 2,
+      "unreachable": 0,
+      "failed": 0,
+      "evidence": "E05"
+    },
+    "repeat": {
+      "ok": 4,
+      "changed": 0,
+      "unreachable": 0,
+      "failed": 0,
+      "evidence": "E08"
+    }
+  },
+  "terraform": {
+    "added": 2,
+    "changed": 0,
+    "destroyed": 0,
+    "resources": [
+      "docker_container.web",
+      "docker_image.nginx"
+    ],
+    "instances": 1,
+    "scaling_demonstrated": false,
+    "evidence": [
+      "E12",
+      "E15"
+    ]
+  },
+  "monitoring": {
+    "query": "lab3_http_requests_total",
+    "sample": 22,
+    "later_approximate_sample": 72,
+    "evidence": [
+      "E19",
+      "E23"
+    ],
+    "post_host_load_test_monitoring_verified": false
+  },
+  "logging": {
+    "count": 32,
+    "event_origin": "manually generated JSON sample events",
+    "evidence": [
+      "E24",
+      "E25"
+    ]
+  },
+  "security": {
+    "bandit": {
+      "medium": 1,
+      "high": 0,
+      "rule": "B104",
+      "evidence": "E26"
+    },
+    "pip_audit": {
+      "resolved_dependencies": 8,
+      "reported_known_vulnerabilities": 0,
+      "evidence": "E27"
+    },
+    "jenkins": {
+      "build": 1,
+      "result": "SUCCESS",
+      "bandit_findings_allowed": true,
+      "evidence": "E30"
+    }
+  },
+  "selenium": {
+    "passed_checks": [
+      "homepage loaded",
+      "enabled feature visible"
+    ],
+    "manual_execution": true,
+    "evidence": "E36"
+  }
+}

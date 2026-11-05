@@ -1,0 +1,159 @@
+LAB 3 - MONITORING, LOGGING & DEVSECOPS
+COMMAND REFERENCE - NOT A RAW EXECUTION LOG
+
+Commands below reconstruct the lab workflow from the supplied transcript and source
+files. Successful results are documented by the linked evidence gallery. Run sections
+intentionally; do not paste this entire file as a shell script. Commands that change
+services or generate traffic are marked by their section. All Linux commands run in
+Ubuntu WSL; Windows WSL commands run in PowerShell.
+
+[WINDOWS / POWERSHELL]
+wsl -d Ubuntu
+# wsl --shutdown stops WSL distributions; do not use it while lab services are needed.
+
+[SETUP - VERIFY EXISTING INSTALLATIONS]
+cd ~/devops-lab3
+git --version
+python3 --version
+docker --version
+docker compose version
+docker run --rm hello-world
+ansible --version
+ansible-playbook --version
+terraform version
+
+[Q1 - LOCAL ANSIBLE CONFIGURATION]
+ansible -i ansible/inventory.ini webservers -m ping
+sudo ansible-playbook -i ansible/inventory.ini ansible/deploy.yml
+curl http://localhost
+sudo ansible-playbook -i ansible/inventory.ini ansible/deploy.yml
+# First successful screenshot: ok=4 changed=2 unreachable=0 failed=0.
+# Repeated screenshot: ok=4 changed=0 unreachable=0 failed=0.
+# Earlier --ask-become-pass attempts timed out; do not store the sudo password.
+
+[Q2 - TERRAFORM LOCAL DOCKER PROVISIONING]
+cd ~/devops-lab3/terraform
+terraform init
+terraform fmt
+terraform validate
+terraform plan -out=tfplan
+terraform apply tfplan
+terraform state list
+docker ps --filter name=lab3-terraform-web
+curl -I http://localhost:8085
+cd ~/devops-lab3
+# Save .terraform.lock.hcl, not state or tfplan, in Git.
+# Do not destroy existing resources to manufacture fresh screenshots.
+
+[Q3 - MONITORING STACK]
+# Stop any foreground host Flask process on port 5002 before starting the app container.
+docker compose -f monitoring/compose.yaml up -d --build
+docker compose -f monitoring/compose.yaml ps
+curl http://localhost:5002/
+curl http://localhost:5002/metrics
+for i in $(seq 1 20); do curl -s http://localhost:5002/ > /dev/null; done
+for i in $(seq 1 50); do curl -s http://localhost:5002/ > /dev/null; done
+# Prometheus target: app:5002, scrape interval 5s.
+# Browser: http://localhost:9090/targets
+# Query: lab3_http_requests_total
+# Grafana: http://localhost:3003
+# Grafana data source URL: http://prometheus:9090
+# Dashboard: DevOps Lab 3 Monitoring; panel: HTTP Request Count.
+
+[Q4 - ELK STACK AND SAMPLE EVENTS]
+# The original Elasticsearch configuration disables authentication; review exposure first.
+docker compose -f elk/compose.yaml up -d
+docker compose -f elk/compose.yaml ps
+curl http://localhost:9200
+for i in $(seq 1 20); do
+  echo "{\"message\":\"Lab 3 request $i\",\"level\":\"INFO\",\"application\":\"devops-lab3\"}" | nc -q 1 localhost 5003
+done
+curl "http://localhost:9200/devops-lab3/_count?pretty"
+# netcat package used if absent: sudo apt install -y netcat-openbsd
+# Kibana: http://localhost:5601
+# Data view: DevOps Lab 3 Logs; index pattern: devops-lab3.
+# The recorded count was 32 after partial sends and retries; reruns add records.
+
+[Q5 - SCANNERS: ORIGINAL WORKFLOW]
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install bandit pip-audit
+bandit -r . -x ./.venv,./terraform,./elk -f txt -o bandit-report.txt
+cat bandit-report.txt
+pip-audit -r requirements.txt -f json -o pip-audit-report.json
+python3 -m json.tool pip-audit-report.json
+# These commands overwrite root reports; prefer fresh output paths for later reruns.
+# The first audit attempt failed because root requirements.txt did not exist.
+# Root requirements.txt was then created with flask and prometheus-client.
+
+[Q5 - JENKINS]
+sudo systemctl start jenkins
+sudo systemctl is-active jenkins
+# Browser: http://localhost:8080
+# Pipeline script from SCM / Git / https://github.com/axdy02/devops-lab3.git
+# Branch */main; script Jenkinsfile; job devops-lab3.
+# Pipeline creates .jenkins-venv and runs:
+# .jenkins-venv/bin/bandit -r app monitoring -f txt -o bandit-report.txt || test "$?" -eq 1
+# .jenkins-venv/bin/pip-audit -r requirements.txt -f json -o pip-audit-report.json
+# Artifact paths: bandit-report.txt,pip-audit-report.json
+# This tolerates all Bandit findings with exit code 1, not just B104.
+
+[Q6 - FEATURE FLAGS: WSL HOST PROCESS]
+cd ~/devops-lab3
+# Identify the exact conflicting container, not arbitrary processes:
+docker ps --format "table {{.Names}}\t{{.Ports}}"
+# Observed container using port 5002: monitoring-app-1.
+docker stop monitoring-app-1
+.venv/bin/python -m pip install -r monitoring/requirements.txt
+ENABLE_NEW_FEATURE=false .venv/bin/python monitoring/app.py
+# Capture OFF page at http://localhost:5002, then Ctrl+C in the server terminal.
+ENABLE_NEW_FEATURE=true .venv/bin/python monitoring/app.py
+# Capture ON page and keep the server running for the next tests.
+# Prometheus's app:5002 target is not the host process.
+
+[Q6 - LOAD TEST: SECOND UBUNTU TERMINAL]
+sudo apt install -y apache2-utils
+ab -n 1000 -c 20 http://127.0.0.1:5002/
+# Run A and Run B are distinct captured results; see docs/results/load-tests.csv.
+
+[Q6 - SELENIUM: SECOND UBUNTU TERMINAL]
+docker run -d --name lab3-selenium -p 127.0.0.1:4444:4444 --shm-size="2g" selenium/standalone-chrome:latest
+# If already created, use docker start lab3-selenium instead.
+curl -s http://localhost:4444/status
+cd ~/devops-lab3
+.venv/bin/python -m pip install selenium
+.venv/bin/python tests/test_selenium.py
+# Remote browser target: http://host.docker.internal:5002/
+
+[GIT - RECORDED WORKFLOW]
+cd ~/devops-lab3
+git init
+git branch -M main
+git status --short
+git add .
+git commit -m "DevOps Lab 3 - Monitoring Logging and DevSecOps"
+git remote add origin https://github.com/axdy02/devops-lab3.git
+# Authenticate as the repository owner; commit identity is not authentication.
+# Do not put a token in a remote URL, script or screenshot.
+git push -u origin main
+git add monitoring/app.py tests/test_selenium.py
+git commit -m "Implement feature flags and Selenium automated testing"
+git push origin main
+# For existing repositories, do NOT rerun git init/remote add as a routine update.
+
+[RECOMMENDED FOLLOW-UP - NOT CLAIMED AS EXECUTED]
+# After copying this documentation pack including .gitignore into the existing repo:
+cd ~/devops-lab3
+git rm --cached --ignore-unmatch terraform/tfplan
+git add .gitignore README.md REPORT.md commands.txt docs scripts
+git status --short
+git commit -m "Document Lab 3 evidence and stop tracking Terraform plan"
+git push origin main
+
+# Optional read-only local checks; outputs are new captures, not historic evidence:
+python3 scripts/check-submission.py
+bash scripts/capture-final-state.sh
+
+# Restore Docker monitoring only after stopping the foreground host Flask process:
+docker compose -f monitoring/compose.yaml up -d --build app
+# Verify Prometheus target UP again; capture proof before making a claim.
